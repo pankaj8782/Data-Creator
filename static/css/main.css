@@ -1,0 +1,163 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Center content container */
+.center-content {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 450px;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Heading style */
+h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Form field container */
+.form-field {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Label styling */
+.form-field label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Input field styling */
+.form-field input[type="text"],
+.form-field input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    margin-top: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+/* Hover effect for input fields */
+.form-field input[type="text"]:hover,
+.form-field input[type="number"]:hover {
+    border-color: #6c63ff;
+    background-color: #ffffff;
+}
+
+/* Focus effect for input fields */
+.form-field input[type="text"]:focus,
+.form-field input[type="number"]:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+}
+
+/* Layout for Number of Rows and Columns in same row */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-row .form-field {
+    flex: 1;
+}
+
+/* Submit button styling */
+.next-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+/* Hover effect for submit button */
+.next-btn:hover {
+    background-color: #5741d4;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+    .center-content {
+        width: 90%;
+        padding: 20px 30px;
+    }
+
+    .form-field input[type="text"],
+    .form-field input[type="number"] {
+        padding: 10px;
+    }
+
+    .next-btn {
+        padding: 12px;
+    }
+
+    /* Adjust the layout of the form for mobile */
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row .form-field {
+        width: 100%;
+    }
+}
+
+/* Button Animation */
+#next-btn {
+    background-color: #6c63ff;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    margin: 20px auto; /* Centered on the form */
+    width: 70%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    animation: pulse 1.5s infinite;
+}
+
+/* Hover Effect */
+#next-btn:hover {
+    background-color: #5741d4;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(108, 99, 255, 0.5);
+}
+
+/* Focus Effect */
+#next-btn:focus {
+    outline: none;
+    box-shadow: 0px 0px 10px rgba(108, 99, 255, 0.8);
+}
+

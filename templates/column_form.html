@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <link rel="icon" href="https://img.icons8.com/fluency/48/create-new.png" type="image/x-icon">
+
+    <title>Column Setup</title>
+
+</head>
+<body>
+    <h1>Set up columns for {{ data_name }}</h1>
+    <form id="column-form" action="/generate_data" method="POST">
+        <input type="hidden" name="data_name" value="{{ data_name }}">
+        <input type="hidden" name="num_columns" value="{{ num_columns }}">
+        <input type="hidden" name="num_rows" value="{{ num_rows }}">
+
+        <div class="form-fields-container">
+            {% for col in column_form %}
+            
+            <!-- Column Name (Full Width) -->
+            <div class="form-field column-name-row" id="biggest">
+                <h3>{{ col + 1 }}</h3>
+                
+                <input type="text" name="col_name_{{ col }}" required placeholder="Column Name">
+            <!-- </div>
+
+            <-- Column Type and Unique Values (Two columns in one row) -->
+            <!-- <div class="form-field column-type-unique-row"> --> 
+                <div class="form-field" id="bigger">
+                    
+                    <select name="col_type_{{ col }}" id="col_type_{{ col }}" onchange="toggleFields('{{ col }}')" required>
+                        <option value="name">Datatype</option>
+                        <option value="address">Address</option>
+                        <option value="email">Email</option>
+                        <option value="name">Name</option>
+                        <option value="phone_number">Phone Number</option>
+                        <option value="city">City</option>
+                        <option value="company">Company</option>
+                        <option value="text">Text</option>
+                        <option value="uuid4">UUID</option>
+                        <option value="boolean">Boolean</option>
+                        <option value="number">Random Integer</option>
+                        <option value="json">JSON</option>
+                        <option value="ipv4">IPv4</option>
+                        <option value="ipv6">IPv6</option>
+                        <option value="url">URL</option>
+                        <option value="latitude">Latitude</option>
+                        <option value="longitude">Longitude</option>
+                        <option value="date">Date</option>
+                        <option value="datetime">Date & Time</option>
+                        <option value="credit_card_number">Credit Card Number</option>
+                        <option value="credit_card_expire">Credit Card Expiry</option>
+                        <option value="currency_name">Currency Name</option>
+                        <option value="job">Job Title</option>
+                        <option value="file_name">File Name</option>
+                        <option value="street_address">Street Address</option>
+                        <option value="postcode">Postcode</option>
+                        <option value="state">State</option>
+                        <option value="state_abbr">State Abbreviation</option>
+                        <option value="country">Country</option>
+                        <option value="country_code">Country Code</option>
+                        <option value="color_name">Color Name</option>
+                        <option value="paragraph">Paragraph</option>
+                        <option value="sentence">Sentence</option>
+                        <option value="word">Word</option>
+                        <option value="safe_email">Safe Email</option>
+                        <option value="domain_name">Domain Name</option>
+                        <option value="domain_word">Domain Word</option>
+                        <option value="locale">Locale</option>
+                        <option value="mime_type">MIME Type</option>
+                        <option value="slug">Slug</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+                <div class="uqrow" style="position: relative; display: inline-flex; line-height: 2;">
+                    <!-- Hidden Checkbox -->
+                    <input 
+                        type="checkbox" 
+                        id="unique_value_{{ col }}" 
+                        name="unique_value_{{ col }}" 
+                        style="display: none; visibility: hidden;"
+                    >
+                    <!-- Label Acting as Visual Representation -->
+                    <label 
+                        for="unique_value_{{ col }}" 
+                        style="
+                            position: relative; 
+                            padding-left: 2em; 
+                            padding-right: 1em; 
+                            cursor: pointer; 
+                            display: inline-flex; 
+                            color: #333; /* Default font color */
+                            transition: 0.25s all ease; 
+                            z-index: 1;" 
+                    >Unique
+                        <!-- Simulating ::before -->
+                        <span 
+                            style="
+                                box-sizing: border-box; 
+                                content: ''; 
+                                position: absolute; 
+                                top: 0.3em; 
+                                left: 0; 
+                                display: block; 
+                                width: 1.4em; 
+                                height: 1.4em; 
+                                border: 2px solid #9098A9; 
+                                border-radius: 6px; 
+                                background: transparent; 
+                                z-index: -1;  /*<  !-- Ensure the span is behind the text -->*/
+                                transition: 0.25s all ease;"
+                        ></span>
+                    </label>
+                </div>
+                
+                <script>
+                    document.querySelectorAll('.uqrow').forEach(row => {
+                        const checkbox = row.querySelector('input[type="checkbox"]');
+                        const label = row.querySelector('label');
+                        const beforeElement = label.querySelector('span'); // Simulated ::before
+                
+                        // Update styles on checkbox state change
+                        checkbox.addEventListener('change', () => {
+                            if (checkbox.checked) {
+                                label.style.paddingLeft = '1em';
+                                label.style.color = '#0f5229'; // Change font color to green
+                                beforeElement.style.top = '0';
+                                beforeElement.style.width = '100%';
+                                beforeElement.style.height = '2em';
+                                beforeElement.style.background = '#b7e6c9';
+                                beforeElement.style.borderColor = '#2cbc63';
+                            } else {
+                                label.style.paddingLeft = '2em';
+                                label.style.color = '#333'; // Reset font color to default
+                                beforeElement.style.top = '0.3em';
+                                beforeElement.style.width = '1.4em';
+                                beforeElement.style.height = '1.4em';
+                                beforeElement.style.background = 'transparent';
+                                beforeElement.style.borderColor = '#9098A9';
+                            }
+                        });
+                    });
+                </script> 
+            </div>
+
+            <!-- Dynamic Fields (helper inputs) -->
+            <div class="container">
+                
+                <div id="min_max_{{ col }}" class="dynamic-fields">
+                    <div class="form-field">
+                        <input type="number" name="min_number_{{ col }}" placeholder="Min Number">
+                    </div>
+
+                <div class="form-field">
+                    <input type="number" name="max_number_{{ col }}" placeholder="Max Number">
+                </div>
+            </div>
+
+            <div id="date_fields_{{ col }}" class="dynamic-fields">
+                <div class="form-field">
+                    <input type="date" name="min_date_{{ col }}" >
+                </div>
+
+                <div class="form-field">
+                    <input type="date" name="max_date_{{ col }}">
+                </div>
+            </div>
+
+            <div id="datetime_fields_{{ col }}" class="dynamic-fields">
+                <div class="form-field">
+                    <input type="datetime-local" name="start_datetime_{{ col }}">
+                </div>
+
+                <div class="form-field">
+                    <input type="datetime-local" name="end_datetime_{{ col }}">
+                </div>
+            </div>
+
+            <div id="custom_fields_{{ col }}" class="dynamic-fields">
+                <div class="form-field">
+                    <input type="text" name="custom_type_{{ col }}" placeholder="Custom Values (comma separated):">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <!-- <input type="submit" value="Generate Data" id="generate-btn"> -->
+        <!-- Updated Generate Data Button -->
+        <div style="position: relative; display: inline-block;">
+            <button type="submit" id="generate-btn" style="width: 150px; height: 40px; position: relative;">
+                <span id="button-label">Generate</span>
+                <div id="spinner" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <div class="spinner"></div>
+                </div>
+            </button>
+        </div>
+        
+
+        </div>
+            <div id="progress-container" style="display: none; margin-top: 20px;">
+                <label for="progress-bar">Generating Data:</label>
+                <div style="width: 100%; background-color: lightgray; height: 30px; border-radius: 5px;">
+                    <div id="progress-bar" style="width: 0%; height: 100%; background-color: green; text-align: center; color: white; line-height: 30px; border-radius: 5px;">
+                        0%
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        <div id="download-section" class="download-btn">
+            <a id="download-link" href="" download>Download CSV File</a>
+        </div>
+    <script>
+        document.getElementById('column-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Show the progress bar
+            document.getElementById('progress-container').style.display = 'block';
+            const progressBar = document.getElementById('progress-bar');
+
+            // Create a FormData object to send the form data via AJAX
+            const formData = new FormData(this);
+
+            // Send data to the server via POST
+            fetch('/generate_data', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                    } else if (data.file_path) {
+                        // Update progress to 100% and show the download link
+                        progressBar.style.width = '100%';
+                        progressBar.innerText = '100%';
+
+                        const downloadLink = document.getElementById('download-link');
+                        downloadLink.href = '/' + data.file_path;
+                        downloadLink.style.display = 'inline-block';
+                        downloadLink.innerText = 'Download CSV File';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        // Update progress bar in real time
+        socket.on('progress', (data) => {
+            const progressBar = document.getElementById('progress-bar');
+            if (data.progress !== undefined) {
+                progressBar.style.width = `${data.progress}%`;
+                progressBar.innerText = `${data.progress}%`;
+            }
+        });
+    </script>
+
+    
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+#date {
+    display: flex;
+    width: 100%;
+}
+
+#bigger{
+    width: 50%;
+}
+#big{
+    width: 20%;
+}
+.form-fields-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to next line if necessary */
+    gap: 10px; /* Optional: Adds space between items */
+    }
+
+    /* Each form field will take up 30% of the container's width */
+    .form-field {
+    display: flex;
+    flex-direction: column;  /* Stack label and input vertically within the div */
+    width: 30%;  /* Adjust the width for each field */
+    box-sizing: border-box;
+    }
+
+    /* Ensuring that all input elements take up full width */
+    .form-field input,
+    .form-field select {
+    width: 100%;
+    }
+
+    .form-field.column-name-row {
+    display: flex;
+    flex-direction: row; /* Items will be in a row, horizontally */
+    gap: 10px;  /* Adds space between elements in the row */
+    align-items: center; /* Centers the elements vertically */
+    }
+
+    h3 {
+    margin-right: 10px;  /* Adds space between the header and input */
+    }
+
+    /* Adjusting the layout for 'Column Type' and 'Unique Values' */
+    .form-field.column-type-unique-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    }
+/* Page Title */
+h1 {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 30px;
+    color: #333;
+}
+
+/* Form container */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    width: 700px;
+    max-width: 100%;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+/* Form Field Styling */
+.form-field {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    width: 100%;
+    
+    
+}
+
+.form-field:nth-child(odd) {
+    margin-right: 0;
+}
+
+/* Label styles */
+.form-field label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    
+}
+
+/* Input, Select, and Checkbox Styling */
+.form-field input[type="text"],
+.form-field input[type="number"],
+.form-field input[type="date"],
+.form-field input[type="datetime-local"],
+.form-field select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+/* Modern, larger, and styled checkbox */
+.form-field input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.form-field input[type="checkbox"]:checked {
+    background-color: #6c63ff;
+    border-color: #6c63ff;
+}
+
+.form-field input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+}
+
+/* Focus effect */
+.form-field input[type="text"]:focus,
+.form-field input[type="number"]:focus,
+.form-field input[type="date"]:focus,
+.form-field input[type="datetime-local"]:focus,
+.form-field select:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+}
+
+.form-field select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.form-field select:focus {
+    border-color: #6c63ff;
+}
+
+/* Layout for Column Name (Full width) */
+.column-name-row {
+    display: block;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px
+}
+
+/* Layout for Column Type and Unique Values (Two columns in one row) */
+.column-type-unique-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.column-type-unique-row .form-field {
+    flex: 1;
+}
+
+/* Layout for Dynamic fields (helper inputs) */
+.dynamic-fields {
+    display: none; /* Hidden by default */
+    display: flex;
+    flex-direction: row;
+    margin-top: -10px;
+    
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.dynamic-fields input {
+    width: 48%;
+    margin-right: 4%;
+}
+
+.dynamic-fields input:last-child {
+    margin-right: 0;
+}
+
+/* Submit and Download Buttons */
+.form-field input[type="submit"] {
+    background-color: #6c63ff;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 50%;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+#download-section {
+    display: none; /* Initially hide the download link */
+    text-align: center;
+}
+
+.download-btn a {
+    background-color: #28a745;
+    border: 1px solid #ddd; 
+    border-radius: 30px;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    display: inline-block; 
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+.form-field input[type="submit"]:hover {
+    background-color: #5741d4;
+}
+
+.download-btn {
+    display: none; 
+    text-align: center;
+    margin-top: 30px;
+    width: auto; 
+    max-width: 300px; 
+    margin-left: auto; 
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+
+.download-btn a:hover {
+    background-color: #218838; 
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Media Queries for better responsiveness */
+@media (max-width: 800px) {
+    form {
+        width: 95%;
+    }
+
+    .form-field {
+        width: 100%;
+        margin-right: 0;
+        
+    }
+
+    .dynamic-fields input {
+        width: 100%;
+    }
+
+    .form-field input[type="submit"] {
+        width: 100%;
+    }
+
+    .form-field select {
+        width: 100%;
+    }
+}

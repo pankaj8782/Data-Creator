@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" href="https://img.icons8.com/fluency/48/create-new.png" type="image/x-icon">
+
+</head>
+<body>
+    <div class="center-content">
+        <h1>Data Generator</h1>
+        <form action="/" method="POST" class="data-form">
+            <!-- Data Name Field -->
+            <div class="form-field">
+                <label for="data_name">Data Name:</label>
+                <input type="text" name="data_name" required><br><br>
+            </div>
+
+            <!-- Number of Columns and Rows in a single row -->
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="num_columns">Number of Columns:</label>
+                    <input type="number" name="num_columns" required><br><br>
+                </div>
+
+                <div class="form-field">
+                    <label for="num_rows">Number of Rows:</label>
+                    <input type="number" name="num_rows" required><br><br>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <input type="submit" value="Next" class="next-btn" id="next-btn">
+        </form>
+    </div>
+</body>
+</html>
