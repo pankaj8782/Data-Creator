@@ -10,10 +10,10 @@ import logging
 import threading
 import time
 
-# Set up logging
+# Set up logging with correct format
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s - CPU: %(message)s%, Memory: %(message)s%",
+    format="%(asctime)s - %(message)s",  # Only include the message part
     handlers=[logging.StreamHandler()]
 )
 
@@ -22,7 +22,7 @@ def log_resource_usage():
     while True:
         cpu = psutil.cpu_percent(interval=1)  # CPU usage in %
         memory = psutil.virtual_memory().percent  # Memory usage in %
-        logging.info("CPU: %s%%, Memory: %s%%", cpu, memory)  # Correct logging format
+        logging.info(f"CPU: {cpu}%, Memory: {memory}%")  # Properly formatted f-string
         time.sleep(5)  # Log every 5 seconds
 
 # Start the logging in a separate thread
