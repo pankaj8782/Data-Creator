@@ -5,7 +5,6 @@ import random
 from datetime import datetime, timedelta
 import os
 import numpy as np
-from flask_socketio import SocketIO, emit
 
 
 def clear_csv_files_in_static_folder():
@@ -17,14 +16,14 @@ def clear_csv_files_in_static_folder():
                 if file.endswith('.csv'):
                     file_path = os.path.join(root, file)
                     os.remove(file_path)
+                    print(f'ID {random.randint(1000,9999) } Storage Cleared Succesfully')
 
 clear_csv_files_in_static_folder()
 
-
+# Initialisations
 np.random.seed(1500)
 app = Flask(__name__)
 faker = Faker()
-socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Track unique numbers used
 unique_numbers_used = set()
@@ -88,15 +87,9 @@ def generate_data():
             start_datetimes.append(start_datetime)
             end_datetimes.append(end_datetime)
 
-        # Generate data rows
-        total_work = num_rows
-        progress_interval = max(1, total_work // 100)  # Update progress every 1%
-
-        # Emit initial progress (0%)
-        socketio.emit('progress', {'progress': 0}, namespace='/')
 
         data = []
-        for i in range(num_rows):
+        for _ in range(num_rows):
             row = {}
             for col_id, col_name in enumerate(columns):
                 col_type = column_types[col_id]
@@ -137,16 +130,14 @@ def generate_data():
                     row[col_name] = (start + timedelta(minutes=random_minutes)).strftime('%Y-%m-%d %H:%M:%S')
 
             data.append(row)
-            # Emit progress every 1%
-            if (i + 1) % progress_interval == 0 or i == num_rows - 1:
-                progress = int(((i + 1) / total_work) * 100)
-                socketio.emit('progress', {'progress': progress}, namespace='/')
+        print(f'{data_name} succesfully appended')
 
         # Save data to CSV
         df = pd.DataFrame(data)
         os.makedirs('static', exist_ok=True)
         file_path = f'static/{data_name}_data.csv'
         df.to_csv(file_path, index=False)
+        print(f'{data_name} CSV Created')
 
         return jsonify({'file_path': file_path})
 
@@ -159,6 +150,7 @@ def download_file(filename):
     if os.path.exists(file_path):
         return send_file(file_path, as_attachment=True)
     return "File not found", 404
+    
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    app.run(debug=False)

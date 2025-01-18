@@ -199,69 +199,11 @@
         
 
         </div>
-            <div id="progress-container" style="display: none; margin-top: 20px;">
-                <div style="width: 100%; background-color: lightgray; height: 30px; border-radius: 30px;">
-                    <div id="progress-bar" style="width: 0%; height: 100%; background-color: green; text-align: center; color: white; line-height: 30px; border-radius: 30px;">
-                        0%
-                    </div>
-                </div>
-            </div>
         </form>
         
         <div id="download-section" class="download-btn">
             <a id="download-link" href="" download>Download</a>
         </div>
-    <script>
-        document.getElementById('column-form').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Show the progress bar
-            document.getElementById('progress-container').style.display = 'block';
-            const progressBar = document.getElementById('progress-bar');
-
-            // Create a FormData object to send the form data via AJAX
-            const formData = new FormData(this);
-
-            // Send data to the server via POST
-            fetch('/generate_data', {
-                method: 'POST',
-                body: formData,
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert('Error: ' + data.error);
-                    } else if (data.file_path) {
-                        // Update progress to 100% and show the download link
-                        progressBar.style.width = '100%';
-                        progressBar.innerText = '100%';
-
-                        const downloadLink = document.getElementById('download-link');
-                        downloadLink.href = '/' + data.file_path;
-                        downloadLink.style.display = 'inline-block';
-                        downloadLink.innerText = 'Download';
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
-
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-    <script>
-        const socket = io();
-
-        // Update progress bar in real time
-        socket.on('progress', (data) => {
-            const progressBar = document.getElementById('progress-bar');
-            if (data.progress !== undefined) {
-                progressBar.style.width = `${data.progress}%`;
-                progressBar.innerText = `${data.progress}%`;
-            }
-        });
-    </script>
-
-    
-
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>

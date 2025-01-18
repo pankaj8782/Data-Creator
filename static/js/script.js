@@ -67,6 +67,7 @@ document.getElementById('column-form').addEventListener('submit', function (even
     })
         .then(response => response.json())
         .then(data => {
+            console.log("Server response:", data);
             if (data.error) {
                 alert('Error: ' + data.error);
             } else if (data.file_path) {
