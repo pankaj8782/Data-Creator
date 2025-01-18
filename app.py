@@ -3,12 +3,10 @@ from faker import Faker
 import pandas as pd
 import random
 from datetime import datetime, timedelta
-import os, time
-from tqdm import tqdm
+import os
 import numpy as np
 from flask_socketio import SocketIO, emit
 
-# Initialize SocketIO
 
 def clear_csv_files_in_static_folder():
     static_folder = 'static'
@@ -92,7 +90,7 @@ def generate_data():
 
         # Generate data rows
         total_work = num_rows
-        progress_interval = total_work // 100  # Update progress every 1%
+        progress_interval = max(1, total_work // 100)  # Update progress every 1%
 
         # Emit initial progress (0%)
         socketio.emit('progress', {'progress': 0}, namespace='/')

@@ -74,7 +74,7 @@ document.getElementById('column-form').addEventListener('submit', function (even
                 const downloadLink = document.getElementById('download-link');
                 downloadLink.href = '/' + data.file_path;
                 downloadLink.style.display = 'inline-block';
-                downloadLink.innerText = 'Download CSV File';
+                downloadLink.innerText = 'Download';
             }
         })
         .catch(error => console.error('Error:', error))

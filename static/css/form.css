@@ -344,7 +344,7 @@ form {
     text-align: center;
     display: block;
     margin: 20px auto; /* Centered on the form */
-    width: 45%;
+    width: 25%;
     transition: transform 0.3s ease, background-color 0.3s ease;
     animation: pulse 1.5s infinite;
 }

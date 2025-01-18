@@ -200,9 +200,8 @@
 
         </div>
             <div id="progress-container" style="display: none; margin-top: 20px;">
-                <label for="progress-bar">Generating Data:</label>
-                <div style="width: 100%; background-color: lightgray; height: 30px; border-radius: 5px;">
-                    <div id="progress-bar" style="width: 0%; height: 100%; background-color: green; text-align: center; color: white; line-height: 30px; border-radius: 5px;">
+                <div style="width: 100%; background-color: lightgray; height: 30px; border-radius: 30px;">
+                    <div id="progress-bar" style="width: 0%; height: 100%; background-color: green; text-align: center; color: white; line-height: 30px; border-radius: 30px;">
                         0%
                     </div>
                 </div>
@@ -210,7 +209,7 @@
         </form>
         
         <div id="download-section" class="download-btn">
-            <a id="download-link" href="" download>Download CSV File</a>
+            <a id="download-link" href="" download>Download</a>
         </div>
     <script>
         document.getElementById('column-form').addEventListener('submit', function (event) {
@@ -240,7 +239,7 @@
                         const downloadLink = document.getElementById('download-link');
                         downloadLink.href = '/' + data.file_path;
                         downloadLink.style.display = 'inline-block';
-                        downloadLink.innerText = 'Download CSV File';
+                        downloadLink.innerText = 'Download';
                     }
                 })
                 .catch(error => console.error('Error:', error));
