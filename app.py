@@ -13,7 +13,7 @@ import time
 # Set up logging
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s - CPU: %(message)s%",
+    format="%(asctime)s - CPU: %(message)s%, Memory: %(message)s%",
     handlers=[logging.StreamHandler()]
 )
 
@@ -22,7 +22,7 @@ def log_resource_usage():
     while True:
         cpu = psutil.cpu_percent(interval=1)  # CPU usage in %
         memory = psutil.virtual_memory().percent  # Memory usage in %
-        logging.info(f"CPU: {cpu}%, Memory: {memory}%")
+        logging.info("CPU: %s%%, Memory: %s%%", cpu, memory)  # Correct logging format
         time.sleep(5)  # Log every 5 seconds
 
 # Start the logging in a separate thread
@@ -32,7 +32,6 @@ def start_usage_tracking():
 
 # Call this function at the start of your app
 start_usage_tracking()
-
 
 def clear_csv_files_in_static_folder():
     static_folder = 'static'
